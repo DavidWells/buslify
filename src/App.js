@@ -175,7 +175,7 @@ export default class App extends Component {
     return (
       <div className="App">
         <header className="app-header">
-          <h1 className="App-title">Busify</h1>
+          <h1 className="App-title">Buslify</h1>
           <div>
             Good morning. Happy {date.dayName()}. The current time is {currentTime}
           </div>
