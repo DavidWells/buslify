@@ -2,12 +2,15 @@ import React, { Component } from 'react'
 import spacetime from 'spacetime'
 import './App.css'
 import busData from './stubs/to-work.json'
+/*
+
 import busDataTwo from './stubs/from-work.json'
 
 const stub = [
   busData,
   busDataTwo
 ]
+/**/
 
 const toWork = {
   title: 'To netlify from home',
@@ -34,7 +37,8 @@ const routes = [
 
 function getBusData(routeInfo) {
   const { transitSystem, routeNumer, stopId } = routeInfo
-  const apiBaseUrl = 'https://webservices.nextbus.com/service/publicJSONFeed'
+
+  const apiBaseUrl = (isLocalHost()) ? 'http://webservices.nextbus.com/service/publicJSONFeed' : '/api/service/publicJSONFeed'
   const busApiUrl = `${apiBaseUrl}?command=predictions&a=${transitSystem}&r=${routeNumer}&s=${stopId}`
 
   // offline stub
@@ -186,4 +190,16 @@ export default class App extends Component {
       </div>
     )
   }
+}
+
+
+function isLocalHost() {
+  const isLocalhostName = window.location.hostname === 'localhost';
+  const isLocalhostIPv6 = window.location.hostname === '[::1]';
+  const isLocalhostIPv4 = window.location.hostname.match(
+    // 127.0.0.1/8
+    /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
+  );
+
+  return isLocalhostName || isLocalhostIPv6 || isLocalhostIPv4;
 }
