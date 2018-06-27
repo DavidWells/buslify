@@ -1,6 +1,8 @@
 const twilio = require('twilio')
 const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
+console.log('twilioAccountSid', twilioAccountSid)
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
+console.log('twilioAccountSid', twilioAuthToken)
 const twilioClient = twilio(twilioAccountSid, twilioAuthToken)
 
 // use twilio SDK to send text message
