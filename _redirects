@@ -1,1 +1,1 @@
-/api/service/publicJSONFeed http://webservices.nextbus.com/service/publicJSONFeed/:splat 200
+/api/service/* http://webservices.nextbus.com/service/:splat 200
