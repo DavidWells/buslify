@@ -3,12 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "antd": "^3.6.4",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "rsuite": "^3.1.1",
-    "spacetime": "^4.2.2"
+    "spacetime": "^4.2.2",
+    "twilio": "^3.17.4"
   },
   "devDependencies": {
     "netlify-lambda": "^0.4.0",
