@@ -34,7 +34,7 @@ const routes = [
 
 function getBusData(routeInfo) {
   const { transitSystem, routeNumer, stopId } = routeInfo
-  const apiBaseUrl = 'http://webservices.nextbus.com/service/publicJSONFeed'
+  const apiBaseUrl = 'https://webservices.nextbus.com/service/publicJSONFeed'
   const busApiUrl = `${apiBaseUrl}?command=predictions&a=${transitSystem}&r=${routeNumer}&s=${stopId}`
 
   // offline stub
