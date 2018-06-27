@@ -1,10 +1,11 @@
-const TwilioSdk = require('twilio')
-const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
-const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
-const twilio= new TwilioSdk(twilioAccountSid, twilioAuthToken)
+import TwilioSdk from 'twilio'
+
+const accountSid = process.env.TWILIO_ACCOUNT_SID
+const authToken = process.env.TWILIO_AUTH_TOKEN
+const twilio = new TwilioSdk(accountSid, authToken)
 
 // use twilio SDK to send text message
-module.exports = (event, context, callback) => {
+exports.handler = (event, context, callback) => {
   const body = JSON.parse(event.body)
 
   const sms = {
