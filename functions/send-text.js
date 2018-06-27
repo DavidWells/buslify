@@ -1,9 +1,7 @@
-const twilio = require('twilio')
+const TwilioSdk = require('twilio')
 const twilioAccountSid = process.env.TWILIO_ACCOUNT_SID
-console.log('twilioAccountSid', twilioAccountSid)
 const twilioAuthToken = process.env.TWILIO_AUTH_TOKEN
-console.log('twilioAccountSid', twilioAuthToken)
-const twilioClient = twilio(twilioAccountSid, twilioAuthToken)
+const twilio= new TwilioSdk(twilioAccountSid, twilioAuthToken)
 
 // use twilio SDK to send text message
 module.exports = (event, context, callback) => {
@@ -20,7 +18,7 @@ module.exports = (event, context, callback) => {
     sms.mediaUrl = body.image
   }
 
-  twilioClient.messages.create(sms).then((message) => {
+  twilio.messages.create(sms).then((message) => {
     console.log(`text message sent!`, message.body)
     console.log(`date_created: ${message.date_created}`)
     return callback(null, {
