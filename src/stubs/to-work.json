@@ -1,0 +1,71 @@
+{
+    "predictions": {
+        "message": [{
+            "text": "Pride Parade today. Dwtn svc reroutes. Add extra travel time",
+            "priority": "Low"
+        }, {
+            "text": "Twin Peaks Tunnel summer closure begins on 6/25. Bus shuttles for KLM during closure. sfmta.com/ twinpeaks",
+            "priority": "Normal"
+        }, {
+            "text": "See something, Say something. Report unusual activity or objects.",
+            "priority": "Low"
+        }],
+        "agencyTitle": "San Francisco Muni",
+        "routeTag": "22",
+        "routeTitle": "22-Fillmore",
+        "direction": {
+            "title": "Outbound to Third + 20th Streets",
+            "prediction": [{
+                "isDeparture": "false",
+                "minutes": "1",
+                "seconds": "61",
+                "tripTag": "7897143",
+                "vehicle": "5436",
+                "block": "2209",
+                "dirTag": "22___O_F00",
+                "epochTime": "1529867483526"
+            }, {
+                "isDeparture": "false",
+                "minutes": "9",
+                "seconds": "587",
+                "tripTag": "7897142",
+                "vehicle": "5467",
+                "block": "2202",
+                "dirTag": "22___O_F00",
+                "epochTime": "1529868009474"
+            }, {
+                "isDeparture": "false",
+                "minutes": "20",
+                "seconds": "1231",
+                "tripTag": "7897141",
+                "vehicle": "5441",
+                "block": "2203",
+                "dirTag": "22___O_F00",
+                "epochTime": "1529868653817"
+            }, {
+                "isDeparture": "false",
+                "minutes": "28",
+                "seconds": "1698",
+                "tripTag": "7897140",
+                "vehicle": "5413",
+                "affectedByLayover": "true",
+                "block": "2210",
+                "dirTag": "22___O_F00",
+                "epochTime": "1529869121150"
+            }, {
+                "isDeparture": "false",
+                "minutes": "38",
+                "seconds": "2298",
+                "tripTag": "7897139",
+                "vehicle": "5445",
+                "affectedByLayover": "true",
+                "block": "2207",
+                "dirTag": "22___O_F00",
+                "epochTime": "1529869721150"
+            }]
+        },
+        "stopTitle": "Hermann St & Fillmore St",
+        "stopTag": "5018"
+    },
+    "copyright": "All data copyright San Francisco Muni 2018."
+}

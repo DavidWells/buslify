@@ -1,0 +1,11 @@
+[build]
+  functions = "functions-build"
+  # This will be run the site build
+  command = "npm run build"
+  # This is the directory is publishing to netlify's CDN
+  publish = "build"
+
+[template.environment]
+  TWILIO_ACCOUNT_SID = "Your Twilio SID"
+  TWILIO_AUTH_TOKEN = "Your Twilio auth token"
+  TWILIO_PHONE_NUMBER = "Your Twilio phone number"

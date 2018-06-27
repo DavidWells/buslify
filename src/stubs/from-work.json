@@ -1,0 +1,74 @@
+{
+    "predictions": {
+        "message": [{
+            "text": "Pride Parade today. Dwtn svc reroutes. Add extra travel time",
+            "priority": "Low"
+        }, {
+            "text": "Twin Peaks Tunnel summer closure begins on 6/25. Bus shuttles for KLM during closure. sfmta.com/ twinpeaks",
+            "priority": "Normal"
+        }, {
+            "text": "See something, Say something. Report unusual activity or objects.",
+            "priority": "Low"
+        }],
+        "agencyTitle": "San Francisco Muni",
+        "routeTag": "22",
+        "routeTitle": "22-Fillmore",
+        "direction": {
+            "title": "Inbound to Bay Street",
+            "prediction": [{
+                "isDeparture": "true",
+                "minutes": "5",
+                "seconds": "313",
+                "tripTag": "7897269",
+                "vehicle": "5429",
+                "affectedByLayover": "true",
+                "block": "2201",
+                "dirTag": "22___I_F00",
+                "epochTime": "1529867940000"
+            }, {
+                "isDeparture": "true",
+                "minutes": "14",
+                "seconds": "853",
+                "tripTag": "7897268",
+                "vehicle": "5421",
+                "affectedByLayover": "true",
+                "block": "2206",
+                "dirTag": "22___I_F00",
+                "epochTime": "1529868480000"
+            }, {
+                "isDeparture": "true",
+                "minutes": "24",
+                "seconds": "1453",
+                "tripTag": "7897267",
+                "vehicle": "5458",
+                "affectedByLayover": "true",
+                "block": "2212",
+                "dirTag": "22___I_F00",
+                "epochTime": "1529869080000"
+            }, {
+                "isDeparture": "true",
+                "minutes": "34",
+                "seconds": "2053",
+                "tripTag": "7897266",
+                "vehicle": "5436",
+                "affectedByLayover": "true",
+                "block": "2209",
+                "dirTag": "22___I_F00",
+                "epochTime": "1529869680000"
+            }, {
+                "isDeparture": "true",
+                "minutes": "44",
+                "seconds": "2653",
+                "tripTag": "7897265",
+                "vehicle": "5467",
+                "affectedByLayover": "true",
+                "block": "2202",
+                "dirTag": "22___I_F00",
+                "epochTime": "1529870280000"
+            }]
+        },
+        "stopTitle": "20th St & 3rd St",
+        "stopTag": "3410"
+    },
+    "copyright": "All data copyright San Francisco Muni 2018."
+}
