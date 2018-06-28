@@ -1,0 +1,69 @@
+
+service:
+  name: buslify-api
+  description: API for scheduling bus notifications
+
+custom:
+  stage: ${opt:stage, 'prod'}
+  repo: ${file(./scripts/git-remote.js):gitUrl}
+  output:
+    file: .serverless/manifest.json
+
+plugins:
+  - serverless-step-functions
+  - serverless-pseudo-parameters
+  - serverless-manifest-plugin
+
+provider:
+  name: aws
+  runtime: nodejs6.10
+  stage: ${self:custom.stage}
+  environment:
+    TWILIO_ACCOUNT_SID: ${file(./secrets.json):TWILIO_ACCOUNT_SID}
+    TWILIO_AUTH_TOKEN: ${file(./secrets.json):TWILIO_AUTH_TOKEN}
+    TWILIO_PHONE_NUMBER: ${file(./secrets.json):TWILIO_PHONE_NUMBER}
+    STATE_MACHINE_ARN: ${self:resources.Outputs.MyStateMachine.Value}
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "states:*"
+      Resource: ${self:resources.Outputs.MyStateMachine.Value}
+
+functions:
+  sendText:
+    handler: lib/sendText.handler
+  scheduleText:
+    handler: lib/scheduleText.handler
+    events:
+      - http:
+          path: schedule
+          method: post
+          cors: true
+
+stepFunctions:
+  stateMachines:
+    waitToSendStateMachine:
+      name: myStateMachine
+      definition:
+        Comment: Schedule a wait for timestamp event
+        StartAt: WaitForTimestamp
+        States:
+          WaitForTimestamp:
+            Type: Wait
+            Comment: Waits for the unix timestamp to pass, then continues the flow
+            TimestampPath: "$.trigger_date"
+            Next: SendText
+          SendText:
+            Type: Task
+            Comment: Triggers the sendText lamdba functions
+            Resource: "arn:aws:lambda:#{AWS::Region}:#{AWS::AccountId}:function:#{AWS::StackName}-sendText"
+            End: true
+
+resources:
+  # Set nice description in CloudFormation
+  Description: ${self:service.description} - ${self:custom.repo}
+  Outputs:
+    MyStateMachine:
+      Description: ARN of the state machine
+      Value:
+        Ref: MyStateMachine

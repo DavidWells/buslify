@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+/api/node_modules
 
 # testing
 /coverage
@@ -9,6 +10,9 @@
 # production
 /build
 /functions-build
+
+# serverless
+.serverless
 
 # misc
 .DS_Store

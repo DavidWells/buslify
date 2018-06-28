@@ -1,0 +1,22 @@
+{
+  "name": "busify-api",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "scripts": {
+    "deploy": "./node_modules/.bin/serverless deploy"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "git-remotes": "^1.0.2",
+    "parse-github-url": "^1.0.2",
+    "serverless": "^1.27.3",
+    "serverless-manifest-plugin": "0.0.4",
+    "serverless-pseudo-parameters": "^1.2.5",
+    "serverless-step-functions": "^1.2.0"
+  },
+  "dependencies": {
+    "twilio": "^3.17.4"
+  }
+}
