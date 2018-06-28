@@ -8,17 +8,17 @@ const twilio = new TwilioSdk(accountSid, authToken)
 
 // use twilio SDK to send text message https://www.twilio.com/docs/libraries/node
 exports.handler = (event, context, callback) => {
-  const body = JSON.parse(event.body)
+  console.log('Send Text Called', event)
 
   const sms = {
-    to: body.to || '17276871858',
-    body: body.message || 'bus soon!',
+    to: event.to,
+    body: event.message,
     from: process.env.TWILIO_PHONE_NUMBER,
   }
 
   // add image to sms if body.image supplied
-  if (body.image) {
-    sms.mediaUrl = body.image
+  if (event.image) {
+    sms.mediaUrl = event.image
   }
 
   twilio.messages.create(sms).then((message) => {

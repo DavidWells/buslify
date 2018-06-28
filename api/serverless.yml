@@ -16,9 +16,10 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs6.10
+  runtime: nodejs8.10
   stage: ${self:custom.stage}
   environment:
+    YOUR_PHONE_NUMBER: ${file(./secrets.json):YOUR_PHONE_NUMBER}
     TWILIO_ACCOUNT_SID: ${file(./secrets.json):TWILIO_ACCOUNT_SID}
     TWILIO_AUTH_TOKEN: ${file(./secrets.json):TWILIO_AUTH_TOKEN}
     TWILIO_PHONE_NUMBER: ${file(./secrets.json):TWILIO_PHONE_NUMBER}

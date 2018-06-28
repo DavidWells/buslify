@@ -5,18 +5,21 @@ const stepfunctions = new AWS.StepFunctions()
 
 exports.handler = (event, context, callback) => {
   const body = JSON.parse(event.body)
-  const taskName = body.taskName
-  const startAt = body.startAt
+  const { startAt, sendTo, message } = body
+  const taskName = `bus-${startAt}`
 
   const params = {
     name: taskName, // taskID and user id?
     stateMachineArn: STATE_MACHINE_ARN,
     input: JSON.stringify({
-      // The timestamp must conform to the RFC3339 profile of ISO 8601
-      // 1331209044000 to toISOString
-      // unix * 1000 => new Date(unix * 1000).toISOString()
+      to: process.env.YOUR_PHONE_NUMBER,
+      message: message,
+      // image: "https://c1.staticflickr.com/3/2899/14341091933_1e92e62d12_b.jpg",
+      /* The timestamp must conform to the RFC3339 profile of ISO 8601
+        1331209044000 to toISOString
+        unix * 1000 => new Date(unix * 1000).toISOString() */
+      /* "trigger_date": "2017-10-15T23:51:09.000Z" */
       trigger_date: new Date(startAt).toISOString()
-      // "trigger_date": "2017-10-15T23:51:09.000Z"
     })
   }
   // start step function

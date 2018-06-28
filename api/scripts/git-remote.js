@@ -1,6 +1,6 @@
 const os = require('os')
 const child_process = require('child_process')
-const parseGithubUrl = require('parse-github-url');
+const parseGithubUrl = require('parse-github-url')
 
 module.exports.gitUrl = (options) => {
   const opts = options || {}
@@ -39,10 +39,11 @@ module.exports.gitUrl = (options) => {
 
   const parsed = parseGithubUrl(originUrl)
 
-  console.log('parsed', parsed)
-  return makeURL(parsed.repo)
+  // console.log('parsed', parsed)
+
+  return makeGithubURL(parsed.repo)
 }
 
-function makeURL(ownerRepo) {
+function makeGithubURL(ownerRepo) {
   return `https://github.com/${ownerRepo}`
 }
