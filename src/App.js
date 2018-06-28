@@ -91,7 +91,8 @@ export default class App extends Component {
     const { data } = sched
     const times = data.predictions.direction.prediction
 
-    const currentTime = spacetime.now('America/Los_Angeles')
+    const timeZone = 'America/Los_Angeles'
+    const currentTime = spacetime.now(timeZone)
     // Is there freakin time to make it?
     const timeToMakeIt = currentTime.clone().add(5, 'minutes')
 
