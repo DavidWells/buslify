@@ -76,12 +76,22 @@ export default class App extends Component {
       })
     })
   }
+  handleBusNotification = () => {
+    const in5Minutes = spacetime.now('America/Los_Angeles').add(5, 'minutes')
+    const data = {
+      "message": "⊂◉‿◉つ bus time",
+      "startAt": in5Minutes.epoch,
+    }
+    console.log('data', data)
+    selectBus(data).then(() => {
+      console.log('reminder set')
+    })
+  }
   renderTimes(sched) {
     const { data } = sched
     const times = data.predictions.direction.prediction
-    console.log('sched.data.predictions.direction.title', sched.data.predictions.direction.title)
-    console.log('times', times)
-    const currentTime = spacetime.now()
+
+    const currentTime = spacetime.now('America/Los_Angeles')
     // Is there freakin time to make it?
     const timeToMakeIt = currentTime.clone().add(5, 'minutes')
 
@@ -103,7 +113,7 @@ export default class App extends Component {
       const diff = currentTime.since(busTime)
       const leaveTime = busTime.clone().subtract(5, 'minutes')
       const leaveTimeDiff = currentTime.since(leaveTime)
-      console.log('diff', diff)
+
       return (
         <div key={i} className='bus-card-contents'>
           <div className='bus-card-time'>
@@ -117,7 +127,9 @@ export default class App extends Component {
               You must leave in: {leaveTimeDiff.rounded} to make it
             </div>
           </div>
-          <button>Notify me</button>
+          <button onClick={this.handleBusNotification} data-id={leaveTime.epoch}>
+            Notify me
+          </button>
         </div>
       )
     })
@@ -192,6 +204,14 @@ export default class App extends Component {
   }
 }
 
+function selectBus(data) {
+  return fetch('https://8ktrhv8aa0.execute-api.us-east-1.amazonaws.com/prod/schedule', {
+    body: JSON.stringify(data),
+    method: 'POST'
+  }).then(response => {
+    return response.json()
+  })
+}
 
 function isLocalHost() {
   const isLocalhostName = window.location.hostname === 'localhost';
