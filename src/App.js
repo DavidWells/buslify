@@ -186,7 +186,7 @@ export default class App extends Component {
 
   }
   render() {
-    const date = spacetime.now()
+    const date = spacetime.now('America/Los_Angeles')
     const currentTime = date.format('time')
 
     return (
