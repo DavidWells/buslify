@@ -1,10 +1,12 @@
 import TwilioSdk from 'twilio'
-
+// Your Account SID from www.twilio.com/console
 const accountSid = process.env.TWILIO_ACCOUNT_SID
+// Your Auth Token from www.twilio.com/console
 const authToken = process.env.TWILIO_AUTH_TOKEN
+// instantiate twilio SDK
 const twilio = new TwilioSdk(accountSid, authToken)
 
-// use twilio SDK to send text message
+// use twilio SDK to send text message https://www.twilio.com/docs/libraries/node
 exports.handler = (event, context, callback) => {
   const body = JSON.parse(event.body)
 

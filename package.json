@@ -6,8 +6,7 @@
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
     "react-scripts": "1.1.4",
-    "spacetime": "^4.2.2",
-    "twilio": "^3.17.4"
+    "spacetime": "^4.2.2"
   },
   "devDependencies": {
     "netlify-lambda": "^0.4.0",

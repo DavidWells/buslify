@@ -13,7 +13,7 @@ const stub = [
 /**/
 
 const toWork = {
-  title: 'To netlify from home',
+  title: 'To Netlify 🚀 from 🏠',
   transitSystem: 'sf-muni',
   routeTitle: 'Outbound to Third + 20th Streets',
   routeNumer: '22',
@@ -22,7 +22,7 @@ const toWork = {
 }
 
 const fromWork = {
-  title: 'From Netlify to Home',
+  title: 'To 🏠 from Netlify 🚀',
   transitSystem: 'sf-muni',
   routeNumer: '22',
   routeTitle: 'Inbound to Bay Street',
@@ -194,7 +194,7 @@ export default class App extends Component {
         <header className="app-header">
           <h1 className="App-title">Buslify</h1>
           <div>
-            Good morning. Happy {date.dayName()}. The current time is {currentTime}
+            {greeting()} Happy {date.dayName()}. The current time is {currentTime}
           </div>
         </header>
         <div className='routes'>
@@ -202,6 +202,22 @@ export default class App extends Component {
         </div>
       </div>
     )
+  }
+}
+
+function greeting() {
+  const now = new Date()
+  const hrs = now.getHours()
+  if (hrs < 12) {
+    return 'Good morning!'
+  }
+
+  if (hrs >= 12 && hrs <= 17) {
+    return 'Good afternoon!'
+  }
+
+  if (hrs >= 17 && hrs <= 24) {
+    return 'Good evening!'
   }
 }
 

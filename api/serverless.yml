@@ -23,12 +23,12 @@ provider:
     TWILIO_ACCOUNT_SID: ${file(./secrets.json):TWILIO_ACCOUNT_SID}
     TWILIO_AUTH_TOKEN: ${file(./secrets.json):TWILIO_AUTH_TOKEN}
     TWILIO_PHONE_NUMBER: ${file(./secrets.json):TWILIO_PHONE_NUMBER}
-    STATE_MACHINE_ARN: ${self:resources.Outputs.MyStateMachine.Value}
+    STATE_MACHINE_ARN: ${self:resources.Outputs.BuslifyStateMachine.Value}
   iamRoleStatements:
     - Effect: "Allow"
       Action:
         - "states:*"
-      Resource: ${self:resources.Outputs.MyStateMachine.Value}
+      Resource: ${self:resources.Outputs.BuslifyStateMachine.Value}
 
 functions:
   sendText:
@@ -44,7 +44,7 @@ functions:
 stepFunctions:
   stateMachines:
     waitToSendStateMachine:
-      name: myStateMachine
+      name: buslifyStateMachine
       definition:
         Comment: Schedule a wait for timestamp event
         StartAt: WaitForTimestamp
@@ -64,7 +64,7 @@ resources:
   # Set nice description in CloudFormation
   Description: ${self:service.description} - ${self:custom.repo}
   Outputs:
-    MyStateMachine:
+    BuslifyStateMachine:
       Description: ARN of the state machine
       Value:
-        Ref: MyStateMachine
+        Ref: BuslifyStateMachine
