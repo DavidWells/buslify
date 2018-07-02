@@ -53,7 +53,9 @@ function getBusData(routeInfo) {
 
 export default class App extends Component {
   state = {
-    schedules: []
+    schedules: [],
+    startTime: Date.now(),
+    dateTime: Date.now()
   }
   componentDidMount() {
     // promise.all or individual requests?
@@ -75,6 +77,11 @@ export default class App extends Component {
         schedules: stateData
       })
     })
+
+    this.interval = setInterval(() => this.setState({ dateTime: Date.now() }), 1000)
+  }
+  componentWillUnmount() {
+    clearInterval(this.interval)
   }
   handleBusNotification = (event) => {
     console.log('leaveTime', event.target.dataset.leaveTime)
@@ -88,11 +95,14 @@ export default class App extends Component {
     })
   }
   renderTimes(sched) {
+    const { dateTime, startTime } = this.state
     const { data } = sched
     const times = data.predictions.direction.prediction
-
+    console.log("TIME", dateTime)
     const timeZone = 'America/Los_Angeles'
-    const currentTime = spacetime.now(timeZone)
+    const startTimeZ = spacetime(startTime, timeZone)
+    const currentTime = spacetime(dateTime, timeZone)
+    console.log('CURRENT', currentTime)
     // Is there freakin time to make it?
     const timeToMakeIt = currentTime.clone().add(5, 'minutes')
 
@@ -102,19 +112,23 @@ export default class App extends Component {
 
     return times.map((time, i) => {
       // enrich data with exact bus time
+      const what = startTimeZ.clone().add(time.seconds, 'seconds')
+      console.log('time', time)
       return {
         ...time,
-        busTime: currentTime.clone().add(time.seconds, 'seconds')
+        busTime: what
       }
     }).filter((time) => {
       const { busTime } = time
       return busTime.isAfter(timeToMakeIt)
     }).map((time, i) => {
       const { busTime } = time
+      console.log('currentTimecurrentTimecurrentTime', currentTime.epoch)
+      const newCurrentTime = spacetime(dateTime, timeZone)
       const diff = currentTime.since(busTime)
       const leaveTime = busTime.clone().subtract(5, 'minutes')
       const leaveTimeDiff = currentTime.since(leaveTime)
-
+      console.log("DIFFF", diff)
       return (
         <div key={i} className='bus-card-contents'>
           <div className='bus-card-time'>
@@ -122,10 +136,10 @@ export default class App extends Component {
               {busTime.format('time')} Bus
             </div>
             <div>
-              <strong>{diff.precise}</strong>
+              Comes <strong>{diff.precise}</strong>
             </div>
             <div>
-              You must leave in: {leaveTimeDiff.rounded} to make it
+              You must leave <strong>{leaveTimeDiff.rounded}</strong> to make it
             </div>
           </div>
           <button
