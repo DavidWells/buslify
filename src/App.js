@@ -84,7 +84,7 @@ export default class App extends Component {
       "startAt": parseInt(leaveTime, 10),
     }
     selectBus(data).then(() => {
-      console.log('reminder set')
+      alert('Reminder Set!')
     })
   }
   renderTimes(sched) {
