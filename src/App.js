@@ -76,13 +76,13 @@ export default class App extends Component {
       })
     })
   }
-  handleBusNotification = () => {
-    const in5Minutes = spacetime.now('America/Los_Angeles').add(5, 'minutes')
+  handleBusNotification = (event) => {
+    console.log('leaveTime', event.target.dataset.leaveTime)
+    const leaveTime = event.target.dataset.leaveTime
     const data = {
       "message": "⊂◉‿◉つ bus time",
-      "startAt": in5Minutes.epoch,
+      "startAt": parseInt(leaveTime, 10),
     }
-    console.log('data', data)
     selectBus(data).then(() => {
       console.log('reminder set')
     })
@@ -128,7 +128,11 @@ export default class App extends Component {
               You must leave in: {leaveTimeDiff.rounded} to make it
             </div>
           </div>
-          <button onClick={this.handleBusNotification} data-id={leaveTime.epoch}>
+          <button
+            onClick={this.handleBusNotification}
+            data-leave-time={leaveTime.epoch}
+            className='notify-me-button'
+          >
             Notify me
           </button>
         </div>
@@ -145,9 +149,11 @@ export default class App extends Component {
     return schedules.map((sched, i) => {
       const { data } = sched
       const { predictions } = data
+      console.lo
       const routeTitle = predictions.routeTitle
       let timesData = sched
-      console.log('routeTitle', routeTitle)
+
+      let routeDirectionTitle = predictions.direction.title
       if (Array.isArray(predictions.direction)) {
         console.log('predictions.direction', predictions.direction)
         timesData = predictions.direction.reduce((acc, curr) => {
@@ -160,12 +166,13 @@ export default class App extends Component {
         console.log('timesData', timesData)
         // TODO update logic
         sched.data.predictions.direction.prediction = timesData.prediction
+        routeDirectionTitle = timesData.title
       }
-      const routeDirectionTitle = predictions.direction.title
+
 
 
       // TODO fix street name
-      const streetName = predictions.direction.stopTitle
+      const streetName = predictions.stopTitle
       return (
         <div className='bus-card' key={i}>
           <h1 className='bus-card-title'>
@@ -222,7 +229,8 @@ function greeting() {
 }
 
 function selectBus(data) {
-  return fetch('https://8ktrhv8aa0.execute-api.us-east-1.amazonaws.com/prod/schedule', {
+  console.log('select bus', data)
+  return fetch('https://zrer1fouga.execute-api.us-east-1.amazonaws.com/prod/schedule', {
     body: JSON.stringify(data),
     method: 'POST'
   }).then(response => {

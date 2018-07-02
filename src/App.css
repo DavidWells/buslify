@@ -29,3 +29,43 @@
   display: flex;
   justify-content: space-between;
 }
+.notify-me-button {
+  border-radius: 5px;
+  padding: 5px 15px;
+  font-size: 16px;
+  text-decoration: none;
+  margin: 0 5px;
+  color: #fff;
+  position: relative;
+  display: inline-block;
+  background-color: #2ecc71;
+  -webkit-box-shadow: 0px 5px 0px 0px #15B358;
+  box-shadow: 0px 5px 0px 0px #15B358;
+  border: none;
+}
+.notify-me-button:active {
+  transform: translate(0px, 5px);
+  box-shadow: 0px 1px 0px 0px;
+}
+.notify-me-button:hover {
+  background-color: #48E68B;
+}
+
+@media (max-width: 768px) {
+  .bus-card-title {
+    font-size: 23px;
+  }
+  .bus-card-route-title {
+    font-size: 14px;
+  }
+  .bus-card-contents {
+    flex-direction: column;
+  }
+  .bus-card-time {
+    margin-bottom: 10px;
+  }
+  .notify-me-button {
+    padding: 10px 15px;
+    margin: 0px;
+  }
+}
